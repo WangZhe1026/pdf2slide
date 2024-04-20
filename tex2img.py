@@ -17,11 +17,14 @@ def pdf_to_ppt(pdf_path, ppt_path):
     #     # 创建新的幻灯片并插入图像
     #     slide = ppt.slides.add_slide(ppt.slide_layouts[6])  # 使用空白幻灯片布局
     #     slide.shapes.add_picture(img_path, Inches(0), Inches(0), width=ppt.slide_width)
+    
+    # 创建一个Matrix对象，用于调整图像的缩放
+    zoom_x = 20.0  # 横向缩放的倍数
+    zoom_y = 20.0  # 纵向缩放的倍数
+    mat = fitz.Matrix(zoom_x, zoom_y)  # 创建缩放矩阵
+
+    
     for page in doc:
-        # 创建一个Matrix对象，用于调整图像的缩放
-        zoom_x = 20.0  # 横向缩放的倍数
-        zoom_y = 20.0  # 纵向缩放的倍数
-        mat = fitz.Matrix(zoom_x, zoom_y)  # 创建缩放矩阵
 
         # 将PDF页面转换为图像
         pix = page.get_pixmap(matrix=mat, alpha=False)  # alpha=False表示不使用透明度
